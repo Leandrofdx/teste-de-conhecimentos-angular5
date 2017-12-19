@@ -21,15 +21,6 @@
 			</ng-template>
 		</div>
 	</header>
-	<div *ngIf="visible">
-		<div class="status-win" *ngIf="status; else lose">	<strong>Parabéns! </strong>resposta Correta</div>
-		<ng-template #lose>
-			<div class="status-lose">
-				<strong>Você errou! </strong>- a resposta correta é {{respostaCorreta}}
-			</div>
-		</ng-template>
-	</div>
-
 	<article class="alternativas">
 
 		<form *ngIf="play" [formGroup]="optionsForm" novalidate>
@@ -41,6 +32,14 @@
 					<label for="{{questions.id}}-{{i}}">{{option}}</label>
 				</li>
 			</ul>
+			<div *ngIf="visible">
+				<div class="status-win" *ngIf="status; else lose">	<strong>Parabéns! </strong>resposta Correta</div>
+				<ng-template #lose>
+					<div class="status-lose">
+						<strong>Você errou! </strong>- a resposta correta é {{respostaCorreta}}
+					</div>
+				</ng-template>
+			</div>
 			<button type="button" [disabled]="!optionsForm.valid" (click)="start()">
 				<div *ngIf="!end">
 					<span *ngIf="!visible">Confirmar</span>
@@ -48,6 +47,7 @@
 				</div>
 				<span *ngIf="end">Resultado</span>
 			</button>
+
 		</form>
 
 	</article>
